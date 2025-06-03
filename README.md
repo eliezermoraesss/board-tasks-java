@@ -1,6 +1,6 @@
 # 📝 Board Tasks Java
 
-Este é um projeto de portfólio desenvolvido por [Eliezer Moraes](https://www.linkedin.com/in/eliezer-moraes-silva-80b68010b/), com o objetivo de demonstrar habilidades em Java, Spring Boot e boas práticas de desenvolvimento de APIs REST.
+Este é um projeto de portfólio desenvolvido com o objetivo de demonstrar habilidades em Java, Spring Boot e boas práticas de desenvolvimento de APIs REST.
 
 ## 🚀 Sobre o Projeto
 
@@ -18,7 +18,7 @@ O **Board Tasks Java** é uma API para gerenciamento de tarefas (Kanban), onde �
 
 - Java 21
 - Spring Boot 3.4.3
-- Maven
+- Gradle (com Kotlin DSL)
 - Spring Web
 - Spring Data JPA
 - PostgreSQL (ou H2 para testes)
@@ -46,17 +46,23 @@ src
 1. Clone o repositório:
 ```bash
 git clone https://github.com/eliezermoraesss/board-tasks-java.git
+cd board-tasks-java
 ```
 
-2. Execute o projeto com sua IDE ou via terminal:
+2. Execute o projeto com Gradle Wrapper:
 ```bash
-./mvnw spring-boot:run
+./gradlew bootRun
 ```
 
 3. Acesse o Swagger para explorar os endpoints:
 ```
 http://localhost:8080/swagger-ui.html
 ```
+
+## 📌 Observações
+
+- Certifique-se de ter o Java 21 instalado na sua máquina.
+- O banco de dados pode ser configurado no arquivo `application.properties` ou via variáveis de ambiente.
 
 ## 🧑‍💻 Autor
 
