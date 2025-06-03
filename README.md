@@ -1,44 +1,52 @@
 # 📝 Board Tasks Java
 
-Este é um projeto de portfólio desenvolvido com o objetivo de demonstrar habilidades em Java, Spring Boot e boas práticas de desenvolvimento de APIs REST.
+Este é um projeto de portfólio desenvolvido com o objetivo de demonstrar conhecimentos em Java, arquitetura em camadas, acesso a dados (DAO) e versionamento de banco de dados com Liquibase.
 
 ## 🚀 Sobre o Projeto
 
-O **Board Tasks Java** é uma API para gerenciamento de tarefas (Kanban), onde é possível criar, listar, atualizar e excluir tarefas.
+O **Board Tasks Java** é um sistema de gerenciamento de tarefas baseado em camadas, que utiliza o padrão DAO para interagir com o banco de dados. É uma aplicação simples com propósitos educacionais, ideal para demonstrar domínio dos conceitos de persistência, separação de responsabilidades e integração com banco de dados.
 
 ### Funcionalidades
 
 - ✅ Criar tarefas
-- 📋 Listar todas as tarefas
-- ✏️ Atualizar informações de uma tarefa
+- 📋 Listar tarefas
+- ✏️ Atualizar tarefas
 - ❌ Remover tarefas
-- 📂 Organizar tarefas por status (To Do, Doing, Done)
+- 📂 Classificação por status
 
-## 🛠️ Tecnologias Utilizadas
+## 🧰 Tecnologias e Ferramentas
 
 - Java 21
-- Spring Boot 3.4.3
-- Gradle (com Kotlin DSL)
-- Spring Web
-- Spring Data JPA
-- PostgreSQL (ou H2 para testes)
-- Swagger / OpenAPI
+- JDBC com padrão DAO
+- MySQL
+- Liquibase
 - Lombok
-- Docker (opcional)
-- Testes com JUnit e Mockito
+- Gradle (Kotlin DSL)
 
-## 📁 Estrutura do Projeto
+## ⚙️ Dependências (Gradle)
 
-```
-src
-├── main
-│   ├── java
-│   │   └── com.eliezer.boardtasks
-│   └── resources
-│       └── application.properties
-└── test
-    └── java
-        └── com.eliezer.boardtasks
+```kotlin
+plugins {
+    id("java")
+}
+
+group = "br.com.dio"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.liquibase:liquibase-core:4.29.1")
+    implementation("mysql:mysql-connector-java:8.0.33")
+    implementation("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
 ```
 
 ## 🧪 Como Executar
@@ -49,20 +57,30 @@ git clone https://github.com/eliezermoraesss/board-tasks-java.git
 cd board-tasks-java
 ```
 
-2. Execute o projeto com Gradle Wrapper:
+2. Configure o banco de dados MySQL e atualize o arquivo de propriedades (`src/main/resources/db.properties` ou similar) com as credenciais corretas.
+
+3. Execute as migrações com o Liquibase (caso esteja configurado via CLI ou integrado ao build).
+
+4. Compile e execute o projeto:
 ```bash
-./gradlew bootRun
+./gradlew build
+java -jar build/libs/board-tasks-java-1.0-SNAPSHOT.jar
 ```
 
-3. Acesse o Swagger para explorar os endpoints:
-```
-http://localhost:8080/swagger-ui.html
-```
+> Ou execute diretamente pela sua IDE favorita (como IntelliJ IDEA).
+
+## 🗃️ Estrutura de Camadas
+
+- **model**: entidades
+- **dao**: acesso ao banco de dados (CRUD)
+- **service**: lógica de negócio
+- **main**: ponto de entrada da aplicação
 
 ## 📌 Observações
 
-- Certifique-se de ter o Java 21 instalado na sua máquina.
-- O banco de dados pode ser configurado no arquivo `application.properties` ou via variáveis de ambiente.
+- Certifique-se de que o servidor MySQL esteja rodando e acessível.
+- Liquibase é usado para versionamento e migração do esquema do banco.
+- Lombok simplifica a criação de getters, setters e construtores.
 
 ## 🧑‍💻 Autor
 
